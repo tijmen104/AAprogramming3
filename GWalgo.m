@@ -1,6 +1,6 @@
 [m, n] = size(V);
-approx = 0
-ub = double(-h)
+approx = 0;
+ub = double(-h);
 
 while approx < 0.878
     r = randn(n,1);
@@ -17,7 +17,7 @@ while approx < 0.878
 
     w = 0;
     for i=1:n
-        for j=i:n
+        for j=i:n % Only consider upper (or lower)triangular part of matrix
             w = w + W(i,j) * (1 - S(i)*S(j)) / 2;
         end
     end

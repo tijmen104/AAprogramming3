@@ -1,18 +1,15 @@
 ops = sdpsettings('solver','sedumi');
-A = sdpvar(4,4);
-% W = rand(4,4);
-h = -sum(sum(W.*(ones(4,4) - A)))/4;
-% h = -(1/4) * (15 + A(4,1) - A(4,3) + A(1,3));
-c = [diag(A) == ones(4,1), A >= 0];
-double(A)
+W = Graph_to_w('maxcut_20_04_3_instance_01.txt');
+% W = [0 4 1 2; 4 0 0 1; 1 0 0 2; 2 1 2 0]; % Toy example
+[m,n] = size(W);
+
+A = sdpvar(m,n);
+h = -sum(sum(W.*(ones(m,n) - A)))/4;
+c = [diag(A) == ones(n,1), A >= 0];
 sol = solvesdp(c, h, ops);
-double(A)
-double(W)
-double(-h)
 sol.solvertime
 
 Y = double(A);
-% V = ichol(Y);
 [Q, D] = eig(value(Y));
 B = Q*sqrt(D);
-V = real(double(B'))
+V = real(double(B'));
