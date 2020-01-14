@@ -79,7 +79,6 @@ public class GraphGenerator {
 		out.close();
 	}
 }
-//public static void main(String[] args){
-//	GraphGenerator GG = new GraphGenerator();
-//
-//}
+public static void main(String[] args){
+	GraphGenerator GG = new GraphGenerator(20,0.7,5,2);
+}
