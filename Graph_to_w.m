@@ -7,4 +7,3 @@ for c=2:3:size(Graph,1)
     w(Graph(c+1)+1,Graph(c)+1)=Graph(c+2);
 end
 end
-
