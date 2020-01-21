@@ -1,12 +1,11 @@
-%         for(int weight=0;weight<maxWeight;weight++){
-%             for(int id =0;id<maxId;id++){
-%                 for(int n =0;n<nodes.length;n++){
-%                     for(int pIndex =0;pIndex<p.length;pIndex++){
 maxWeight = 15;
 maxId = 10;
 nodes = [2,5,7,10,15,20,30,40,60,70];
 p=[05,10];
-
+graphnames =zeros(3001,1);
+index = 1;
+MSol = zeros(3001,1);
+MApprox = zeros(3001,1);
 for w=0:maxWeight-1
     for id=0:maxId-1
         for n=1:size(nodes,2)
@@ -23,8 +22,18 @@ for w=0:maxWeight-1
                 idString = int2str(id);
                 
                 graphFileName = strcat('./Graphs/maxcut_',nodeString,pString,wString,idString);
+                [solution, approx] = MaxCutFunc(graphFileName);
+                graphnames(index) = graphFileName;
+              
+                MSol(index,:)= solution;
+                MApprox(index,:)=approx;
                 
+                index=index+1;
+
             end
         end
     end
 end
+writematrix(graphnames,'./Results/graphnames.xls');
+writematrix(MSol,'./Results/solution.xls');
+writematrix(MApprox,'./Results/approx.xls');
